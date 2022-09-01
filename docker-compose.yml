@@ -1,0 +1,29 @@
+# If you want to make local changes (that won't effect everyone),
+# please create a docker-compose.local.yml file instead
+version: '3'
+services:
+  apachephp:
+    build:
+      context: .
+    container_name: withwithout_apachephp
+    ports:
+      - "127.0.0.1:80:8000"
+      - "127.0.0.1:443:8443"
+    volumes:
+      - "./:/app"
+      - "./docker/supervisor.d:/etc/supervisor/conf.d/"
+      - "./docker/profiling:/tmp/profiling"
+    environment:
+      XDEBUG_REMOTE_HOST: 172.18.0.1
+      XDEBUG_MAX_NESTING_LEVEL: 500
+      PHP_MAX_EXECUTION_TIME: 180
+      PHP_PROCESS_IDLE_TIMEOUT: 180
+      PHP_MEMORY_LIMIT: 512M
+      WEBROOT: /app/web
+      PHP_OPCACHE_VALIDATE_TIMESTAMPS: 1
+    restart: on-failure
+
+networks:
+  default:
+    external:
+      name: dockerdevenvironment_default

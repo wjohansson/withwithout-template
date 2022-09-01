@@ -1,0 +1,13 @@
+# Enable brotli compression for relevant content types
+AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/json
+
+# Don't let anyone put this site in an iframe etc. If
+# exceptions are needed for specific URLs, then make
+# exceptions, don't just remove the header completely.
+# More info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+Header set X-Frame-Options "deny"
+
+# Keep static assets cached
+<FilesMatch ".+\.(css|js|jpg|jpeg|png|gif|ico|svg|mp4|ttf|woff|woff2|otf)$">
+Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>

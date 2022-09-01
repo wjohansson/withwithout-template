@@ -1,0 +1,15 @@
+/.idea/*
+!/.idea/codeStyleSettings.xml
+.git
+build_tmp/
+.env
+.DS_Store
+**/.DS_Store
+.vscode/
+
+# npm packages should never ever be included in git
+/node_modules
+
+# The vendor folder contains Composer packages and since those
+# are installed by Composer, we don't include them in git
+/vendor
